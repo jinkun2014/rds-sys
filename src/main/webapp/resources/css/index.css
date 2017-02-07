@@ -1,0 +1,19 @@
+/* TAB */
+.content {
+    padding: 1px;
+}
+
+/* 导航 */
+.headerTop {
+     /*background: #f0f0f0; */
+    background: url(/resources/images/bg.gif) fixed  repeat-y rgb(240, 240, 240);
+    height: 36px;
+    line-height: 36px;
+    width: 100%;
+    overflow: hidden;
+    top:2px;
+    bottom: 2px;
+    position: absolute;
+    border-color: #ddd;
+    text-align: center;
+}

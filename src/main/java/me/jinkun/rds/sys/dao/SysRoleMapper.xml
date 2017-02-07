@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.jinkun.rds.sys.dao.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="me.jinkun.rds.sys.domain.SysRole">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="seq" jdbcType="TINYINT" property="seq"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="status" jdbcType="TINYINT" property="status"/>
+            <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id,
+        name,
+        seq,
+        description,
+        status,
+        del_flag,
+        update_time,
+        create_time
+    </sql>
+    <select id="selectByExample" parameterType="me.jinkun.rds.sys.domain.SysRoleExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_role
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectPageByExample" parameterType="me.jinkun.rds.sys.domain.SysRoleExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_role
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        limit #{start},#{size};
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_role
+        where id = #{id}
+    </delete>
+    <delete id="deleteByExample" parameterType="me.jinkun.rds.sys.domain.SysRoleExample">
+        delete from sys_role
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="me.jinkun.rds.sys.domain.SysRole">
+        insert into sys_role (<include refid="Base_Column_List"/>)
+        values (
+                #{id},
+                #{name},
+                #{seq},
+                #{description},
+                #{status},
+                #{delFlag},
+                #{updateTime},
+                #{createTime}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="me.jinkun.rds.sys.domain.SysRole">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="seq != null">
+                seq,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            #{id},
+            </if>
+            <if test="name != null">
+            #{name},
+            </if>
+            <if test="seq != null">
+            #{seq},
+            </if>
+            <if test="description != null">
+            #{description},
+            </if>
+            <if test="status != null">
+            #{status},
+            </if>
+            <if test="delFlag != null">
+            #{delFlag},
+            </if>
+            <if test="updateTime != null">
+            #{updateTime},
+            </if>
+            <if test="createTime != null">
+            #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="me.jinkun.rds.sys.domain.SysRoleExample" resultType="java.lang.Long">
+        select count(*) from sys_role
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_role
+        <set>
+            <if test="record.id != null">
+                id = #{record.id},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name},
+            </if>
+            <if test="record.seq != null">
+                seq = #{record.seq},
+            </if>
+            <if test="record.description != null">
+                description = #{record.description},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status},
+            </if>
+            <if test="record.delFlag != null">
+                del_flag = #{record.delFlag},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_role
+        set
+            id = #{record.id},
+            name = #{record.name},
+            seq = #{record.seq},
+            description = #{record.description},
+            status = #{record.status},
+            del_flag = #{record.delFlag},
+            update_time = #{record.updateTime},
+            create_time = #{record.createTime}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="me.jinkun.rds.sys.domain.SysRole">
+        update sys_role
+        <set>
+            <if test="name != null">
+            name = #{name},
+            </if>
+            <if test="seq != null">
+            seq = #{seq},
+            </if>
+            <if test="description != null">
+            description = #{description},
+            </if>
+            <if test="status != null">
+            status = #{status},
+            </if>
+            <if test="delFlag != null">
+            del_flag = #{delFlag},
+            </if>
+            <if test="updateTime != null">
+            update_time = #{updateTime},
+            </if>
+            <if test="createTime != null">
+            create_time = #{createTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="me.jinkun.rds.sys.domain.SysRole">
+        update sys_role
+        set
+            name = #{name},
+            seq = #{seq},
+            description = #{description},
+            status = #{status},
+            del_flag = #{delFlag},
+            update_time = #{updateTime},
+            create_time = #{createTime}
+        where id = #{id}
+    </update>
+</mapper>
