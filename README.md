@@ -1,3 +1,5 @@
+#基于SSM-EasyUI的权限管理系统
+
 后台采用Spring+SpringMvc+MyBatis，前端使用Easyui，数据库采用MySql实现的一套权限管理系统。
 
 项目地址：[https://github.com/cskun/rds-sys](https://github.com/cskun/rds-sys "https://github.com/cskun/rds-sys")
