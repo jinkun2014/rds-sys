@@ -1,4 +1,4 @@
-import me.jinkun.rds.common.utils.Md5Util;
+import me.jinkun.rds.common.utils.UtilMd5;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Test;
@@ -34,6 +34,6 @@ public class TestMd5Hash {
 
         //admin密码-123456
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(Md5Util.md5("123456", String.valueOf(sdf.parse("2017-01-09 10:52:59").getTime())));
+        System.out.println(UtilMd5.md5("123456", String.valueOf(sdf.parse("2017-01-09 10:52:59").getTime())));
     }
 }

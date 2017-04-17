@@ -2,9 +2,9 @@ package me.jinkun.rds.sys.service;
 
 import me.jinkun.rds.sys.domain.SysUser;
 import me.jinkun.rds.sys.web.form.SysUserForm;
-import me.jinkun.rds.sys.web.result.BaseResult;
-import me.jinkun.rds.sys.web.result.EUDataGridResult;
-import me.jinkun.rds.sys.web.result.Tree;
+import me.jinkun.rds.common.base.BaseResult;
+import me.jinkun.rds.common.base.EUDataGridResult;
+import me.jinkun.rds.common.base.Tree;
 
 import java.util.List;
 

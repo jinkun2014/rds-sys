@@ -1,5 +1,7 @@
 package me.jinkun.rds.sys.web.form;
 
+import me.jinkun.rds.common.base.BaseForm;
+
 /**
  * @Description: HelloWorld！ <br/>
  * @Autor: Created by JinKun on 2016-12-30.

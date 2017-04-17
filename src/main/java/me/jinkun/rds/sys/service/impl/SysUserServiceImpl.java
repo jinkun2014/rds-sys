@@ -1,15 +1,15 @@
 package me.jinkun.rds.sys.service.impl;
 
 import me.jinkun.rds.common.shiro.ShiroUser;
-import me.jinkun.rds.common.utils.Md5Util;
+import me.jinkun.rds.common.utils.UtilMd5;
 import me.jinkun.rds.sys.convert.SysUserConvert;
 import me.jinkun.rds.sys.dao.*;
 import me.jinkun.rds.sys.domain.*;
 import me.jinkun.rds.sys.service.SysUserService;
 import me.jinkun.rds.sys.web.form.SysUserForm;
-import me.jinkun.rds.sys.web.result.BaseResult;
-import me.jinkun.rds.sys.web.result.EUDataGridResult;
-import me.jinkun.rds.sys.web.result.Tree;
+import me.jinkun.rds.common.base.BaseResult;
+import me.jinkun.rds.common.base.EUDataGridResult;
+import me.jinkun.rds.common.base.Tree;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -301,7 +301,7 @@ public class SysUserServiceImpl implements SysUserService {
         if (form.getId() != null) {
             SysUser oldEntity = sysUserMapper.selectByPrimaryKey(form.getId());
             entity.setUpdateTime(new Date());
-            entity.setPassword(Md5Util.md5(entity.getPassword(), String.valueOf(oldEntity.getCreateTime().getTime())));
+            entity.setPassword(UtilMd5.md5(entity.getPassword(), String.valueOf(oldEntity.getCreateTime().getTime())));
             sysUserMapper.updateByPrimaryKeySelective(entity);
 
             //删除user-org中间表就数据
@@ -326,7 +326,7 @@ public class SysUserServiceImpl implements SysUserService {
             entity.setUpdateTime(new Date());
             entity.setCreateTime(new Date());
             //用创建时间作为盐给密码加密
-            entity.setPassword(Md5Util.md5(entity.getPassword(), String.valueOf(entity.getCreateTime().getTime())));
+            entity.setPassword(UtilMd5.md5(entity.getPassword(), String.valueOf(entity.getCreateTime().getTime())));
             sysUserMapper.insert(entity);
         }
 

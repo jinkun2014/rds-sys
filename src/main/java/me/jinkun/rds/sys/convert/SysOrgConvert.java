@@ -1,5 +1,6 @@
 package me.jinkun.rds.sys.convert;
 
+import me.jinkun.rds.common.base.BaseConvert;
 import me.jinkun.rds.sys.domain.SysOrg;
 import me.jinkun.rds.sys.web.form.SysOrgForm;
 

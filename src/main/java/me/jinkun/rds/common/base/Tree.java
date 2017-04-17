@@ -1,4 +1,4 @@
-package me.jinkun.rds.sys.web.result;
+package me.jinkun.rds.common.base;
 
 import java.io.Serializable;
 import java.util.List;

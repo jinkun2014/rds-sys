@@ -1,4 +1,4 @@
-package me.jinkun.rds.sys.web.form;
+package me.jinkun.rds.common.base;
 
 /**
  * @Description:  <br/>

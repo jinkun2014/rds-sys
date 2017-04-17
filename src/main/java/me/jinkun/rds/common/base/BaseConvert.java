@@ -1,4 +1,4 @@
-package me.jinkun.rds.sys.convert;
+package me.jinkun.rds.common.base;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

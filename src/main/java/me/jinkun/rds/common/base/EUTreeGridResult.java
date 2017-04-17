@@ -1,16 +1,16 @@
-package me.jinkun.rds.sys.web.result;
+package me.jinkun.rds.common.base;
 
 import java.util.List;
 
-public class EUDataGridResult extends BaseResult {
+public class EUTreeGridResult extends BaseResult {
 
     private long total;
     private List<?> rows;
 
-    public EUDataGridResult() {
+    public EUTreeGridResult() {
     }
 
-    public EUDataGridResult(long total, List<?> rows) {
+    public EUTreeGridResult(long total, List<?> rows) {
         this.total = total;
         this.rows = rows;
     }
