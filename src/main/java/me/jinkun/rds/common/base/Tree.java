@@ -10,6 +10,7 @@ import java.util.List;
 public class Tree implements Serializable {
     private Long id;
     private String text;
+    private int seq;
     private String state = "open";// open,closed
     private boolean checked = false;
     private List<Tree> children;
@@ -88,5 +89,13 @@ public class Tree implements Serializable {
 
     public void setAttributes(Object attributes) {
         this.attributes = attributes;
+    }
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 }

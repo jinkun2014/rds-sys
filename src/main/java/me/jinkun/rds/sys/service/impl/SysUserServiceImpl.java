@@ -202,6 +202,13 @@ public class SysUserServiceImpl implements SysUserService {
             }
         }
 
+        //排序调整菜单顺序
+        Collections.sort(treeList, new Comparator<Tree>() {
+            @Override
+            public int compare(Tree t1, Tree t2) {
+                return t1.getSeq()-t2.getSeq();
+            }
+        });
         return BaseResult.ok("请求成功", treeList);
     }
 
@@ -241,6 +248,14 @@ public class SysUserServiceImpl implements SysUserService {
                 childList.add(tree);
             }
         }
+
+        //排序调整菜单顺序
+        Collections.sort(childList, new Comparator<Tree>() {
+            @Override
+            public int compare(Tree t1, Tree t2) {
+                return t1.getSeq()-t2.getSeq();
+            }
+        });
 
         return childList;
     }
@@ -282,6 +297,7 @@ public class SysUserServiceImpl implements SysUserService {
         tree.setIsLeaf(resource.getIsLeaf());
         tree.setPid(resource.getPid());
         tree.setAttributes(resource);
+        tree.setSeq(resource.getSeq());
         return tree;
     }
 
