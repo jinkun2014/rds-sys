@@ -9,11 +9,16 @@
 <!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
 
 <!-- easyui -->
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/jquery-easyui-1.5/themes/material/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/jquery-easyui-1.5/themes/icon.css"/>
-<script type="text/javascript" src="${ctx}/resources/jquery-easyui-1.5/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/jquery-easyui-1.5/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${ctx}/resources/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/jquery-easyui-1.5/themes/material/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/jquery-easyui-1.5/themes/icon.css"/>
+<script type="text/javascript" src="${ctx}/resources/easyui/jquery-easyui-1.5/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/easyui/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${ctx}/resources/easyui/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+
+<!-- easyui扩展 -->
+<link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/easyui-ext/icons/icon-standard.css"/>
+<script type="text/javascript" src="${ctx}/resources/easyui/easyui-ext/icons/icon-standard.js"></script>
+
 <!-- 自定义js -->
 <script type="text/javascript" src="${ctx}/resources/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/extJs.js"></script>

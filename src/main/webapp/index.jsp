@@ -14,7 +14,11 @@
 
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/index.css"/>
     <script>
+        var globalWindow;
         $(function () {
+            //初始化全局的Window
+            globalWindow = $("#globalWindow");
+
             //加载当前用户的1级菜单
             $.ajax({
                 type: "GET",
@@ -94,7 +98,8 @@
         <!-- 用户信息 -->
         <span style="float: right;margin-right: 10px;text-align: center">
             <b>当前用户:&nbsp;<shiro:principal property="name"></shiro:principal></b>&nbsp;
-            <a href="#" id="logout" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">退出系统</a>
+            <a href="#" id="logout" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
+               style="margin-bottom: 3px;">退出系统</a>
         </span>
     </div>
 </div>
@@ -108,5 +113,7 @@
         </div>
     </div>
 </div>
+<!-- 全局弹出框 -->
+<div id="globalWindow" style="display: none"></div>
 </body>
 </html>

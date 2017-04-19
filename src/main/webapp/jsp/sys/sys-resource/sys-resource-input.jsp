@@ -21,7 +21,7 @@ Date: 2016-12-30
         </tr>
         <tr>
             <td></td>
-            <td><label>打开方式 ajax,iframe:</label></td>
+            <td><label>打开方式:</label></td>
             <td>
                 <select class="easyui-combobox" name="openMode" data-options="panelHeight:'auto',value:'0'" style="width:173px;">
                     <option value="0">ajax</option>
@@ -40,7 +40,9 @@ Date: 2016-12-30
             <td></td>
             <td><label>资源图标:</label></td>
             <td><input class="easyui-textbox" type="text" name="icon" data-options="required:false"/></td>
-            <td></td>
+            <td>
+                <a href="#" class="easyui-linkbutton" onclick="javascript:SysResource.input.chooseIcon()">选择</a>
+            </td>
         </tr>
         <tr>
             <td></td>

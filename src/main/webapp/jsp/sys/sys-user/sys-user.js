@@ -117,7 +117,12 @@ var SysUser = {
                     {field: 'status', title: '用户状态', width: '8.636%', hidden: false,formatter:function(value,row,index){return value==0?'启用':'停用';}},
                     {field: 'updateTime', title: '更新时间', width: '10%', hidden: false},
                     {field: 'createTime', title: '创建时间', width: '10%', hidden: false},
-                ]]
+                ]],
+                //设置选中事件，清除之前的行选择
+                onClickRow: function (index,row) {
+                    SysUserList.datagrid("unselectAll");
+                    SysUserList.datagrid("selectRow",index);
+                },
             });
         },
         getSelectionsIds: function () {

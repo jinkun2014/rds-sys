@@ -174,7 +174,11 @@ var SysRole = {
                 pagination: true,
                 pageSize: 30,
                 toolbar: '#SysRoleToolbar',//SysRole.list.toolbar,
+                //允许多选
                 singleSelect: false,
+                //设置复选框和行的选择状态不同步
+                checkOnSelect: true,
+                selectOnCheck: true,
                 collapsible: false,
                 columns: [[
                     {field: 'ck', checkbox: true},
@@ -206,6 +210,11 @@ var SysRole = {
                         //}
                     }
                 ]],
+                //设置选中事件，清除之前的行选择
+                onClickRow: function (index,row) {
+                    SysRoleList.datagrid("unselectAll");
+                    SysRoleList.datagrid("selectRow",index);
+                },
                 onLoadSuccess: function (data) {
                     $('.easyui-linkbutton-edit').linkbutton({text: '编辑'});
                     $('.easyui-linkbutton-authorize').linkbutton({text: '授权'});

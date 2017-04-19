@@ -5,6 +5,10 @@ var SysResourceForm;
 
 //其它组件
 var parentResource;
+//选择图片对话框
+var SysResourceChooseIcon;
+//图片textbox
+var iconText;
 
 var SysResource = {
     URL: {
@@ -13,6 +17,9 @@ var SysResource = {
         },
         listUI: function () {
             return ctx + "/sys/resources/ui/list";
+        },
+        iconUI: function () {
+            return ctx + "/sys/resources/ui/icon";
         },
         list: function () {
             return ctx + "/sys/resources/";
@@ -26,8 +33,8 @@ var SysResource = {
         get: function (id) {
             return ctx + "/sys/resources/" + id;
         },
-        tree:function(){
-            return ctx+"/sys/resources/tree"
+        tree: function () {
+            return ctx + "/sys/resources/tree"
         }
     },
     input: {
@@ -39,6 +46,8 @@ var SysResource = {
         initComponent: function () {
             SysResourceForm = $("#SysResourceForm");
             parentResource = $('#parentResource');
+            SysResourceChooseIcon = $('#SysResourceChooseIcon');
+            iconText = $("input[name='icon']");
         },
         initForm: function () {
             SysResourceForm.form({
@@ -62,6 +71,22 @@ var SysResource = {
         },
         close: function () {
             SysResourceEdit.window('close');
+        },
+        chooseIcon: function () {
+            //使用全局弹窗
+            globalWindow.window({
+                    title:'选择图标',
+                    width:600,
+                    height:400,
+                    modal:true,
+                    href: SysResource.URL.iconUI(),
+                    cache:false
+                })
+                .window("open");
+        },
+        setIcon: function (value) {
+            iconText.textbox("setValue", value);
+            globalWindow.window("close");
         }
     },
     list: {
@@ -88,18 +113,50 @@ var SysResource = {
                 parentField: 'pid',//自定义属性
                 columns: [[
                     {field: 'ck', checkbox: true},
-                    {field: 'id', title: '主键', hidden:true},
-                    {field: 'name', title: '资源名称', width: '10%', hidden:false},
-                    {field: 'url', title: '资源路径', width: '7.917%', hidden:false},
-                    {field: 'openMode', title: '打开方式 ajax,iframe', width: '7.917%', hidden:false},
-                    {field: 'description', title: '资源介绍', width: '7.917%', hidden:false},
-                    {field: 'icon', title: '资源图标', width: '7.917%', hidden:false},
-                    {field: 'seq', title: '排序', width: '7.917%', hidden:false},
-                    {field: 'status', title: '状态', width: '7.917%', hidden:false,formatter:function(value,row,index){return value==0?'启用':'停用';}},
-                    {field: 'resourceType', title: '资源类别', width: '7.917%', hidden:false,formatter:function(value,row,index){return value==0?'菜单':'按钮';}},
-                    {field: 'delFlag', title: '删除标记', width: '7.917%', hidden:true},
-                    {field: 'updateTime', title: '更新时间', width: '9%', hidden:false},
-                    {field: 'createTime', title: '创建时间', width: '9%', hidden:false},
+                    {field: 'id', title: '主键', hidden: true},
+                    {field: 'name', title: '资源名称', width: '10%', hidden: false},
+                    {field: 'url', title: '资源路径', width: '10%', hidden: false},
+                    {
+                        field: 'openMode',
+                        title: '打开方式',
+                        width: '7.917%',
+                        hidden: false,
+                        formatter: function (value, row, index) {
+                            return value == '0' ? 'ajax' : 'iframe';
+                        }
+                    },
+                    {field: 'description', title: '资源介绍', width: '7.917%', hidden: false},
+                    {
+                        field: 'icon', title: '资源图标', width: '7.917%', hidden: false,
+                        formatter: function (value, row, index) {
+                            if (value) {
+                                return "<input type='button' class='" + value + "' title='" + value + "' style='margin:0px;width: 20px;height: 20px;'/>";
+                            }
+                            return value;
+                        }
+                    },
+                    {field: 'seq', title: '排序', width: '7.917%', hidden: false},
+                    {
+                        field: 'status',
+                        title: '状态',
+                        width: '7.917%',
+                        hidden: false,
+                        formatter: function (value, row, index) {
+                            return value == 0 ? '启用' : '停用';
+                        }
+                    },
+                    {
+                        field: 'resourceType',
+                        title: '资源类别',
+                        width: '7.917%',
+                        hidden: false,
+                        formatter: function (value, row, index) {
+                            return value == 0 ? '菜单' : '按钮';
+                        }
+                    },
+                    {field: 'delFlag', title: '删除标记', width: '7.917%', hidden: true},
+                    {field: 'updateTime', title: '更新时间', width: '9%', hidden: false},
+                    {field: 'createTime', title: '创建时间', width: '9%', hidden: false},
                 ]],
                 //对返回的数据进行处理,便于显示树形结构
                 loadFilter: function (data, parentId) {
@@ -111,7 +168,12 @@ var SysResource = {
                         jsonStr = jsonStr.replace(new RegExp(parentField, "gm"), "_parentId");
                         return JSON.parse(jsonStr); //可以将json字符串转换成json对象
                     }
-                }
+                },
+                //设置选中事件，清除之前的行选择
+                onClickRow: function (row) {
+                    SysResourceList.treegrid("unselectAll");
+                    SysResourceList.treegrid("selectRow",row.id);
+                },
             });
         },
         getSelectionsIds: function () {
@@ -126,16 +188,16 @@ var SysResource = {
         //增
         add: function () {
             SysResourceEdit.window({
-                href: SysResource.URL.inputUI(),
-                onLoad: function () {
-                    parentResource.combotree({
-                        url: SysResource.URL.tree(),
-                        method: 'get',
-                        panelHeight: 'auto'
-                    });
-                }
-            })
-            .window("open");
+                    href: SysResource.URL.inputUI(),
+                    onLoad: function () {
+                        parentResource.combotree({
+                            url: SysResource.URL.tree(),
+                            method: 'get',
+                            panelHeight: 'auto'
+                        });
+                    }
+                })
+                .window("open");
         },
         //改
         edit: function () {
@@ -151,33 +213,33 @@ var SysResource = {
             }
 
             SysResourceEdit.window({
-                href: SysResource.URL.inputUI(),
-                onLoad: function () {
-                    //方案一：使用Form的load去load数据
-                    //SysResourceForm.form("load", SysResource.URL.get(sels[0].id));
-                    //方案二：直接使用列表的row数据
-                    //SysResourceForm.form("load",sels[0]);
-                    //方案三：使用Ajax请求数据
-                    $.ajax({
-                        type: "GET",
-                        url: SysResource.URL.get(sels[0].id),
-                        success: function (data) {
-                            if (data.code == 200) {
-                                SysResourceForm.form("load", data.data);
-                                parentResource.combotree({
-                                    url: SysResource.URL.tree(),
-                                    method: 'get',
-                                    panelHeight: 'auto',
-                                    onLoadSuccess: function () {
-                                        parentResource.combotree('setValue', data.data.pid);
-                                    }
-                                });
+                    href: SysResource.URL.inputUI(),
+                    onLoad: function () {
+                        //方案一：使用Form的load去load数据
+                        //SysResourceForm.form("load", SysResource.URL.get(sels[0].id));
+                        //方案二：直接使用列表的row数据
+                        //SysResourceForm.form("load",sels[0]);
+                        //方案三：使用Ajax请求数据
+                        $.ajax({
+                            type: "GET",
+                            url: SysResource.URL.get(sels[0].id),
+                            success: function (data) {
+                                if (data.code == 200) {
+                                    SysResourceForm.form("load", data.data);
+                                    parentResource.combotree({
+                                        url: SysResource.URL.tree(),
+                                        method: 'get',
+                                        panelHeight: 'auto',
+                                        onLoadSuccess: function () {
+                                            parentResource.combotree('setValue', data.data.pid);
+                                        }
+                                    });
+                                }
                             }
-                        }
-                    });
-                }
-            })
-            .window("open");
+                        });
+                    }
+                })
+                .window("open");
         },
         //删
         delete: function () {
@@ -190,8 +252,8 @@ var SysResource = {
             $.messager.confirm({
                 title: '确认提示框',
                 msg: '你确定要删除吗？',
-                fn: function(r){
-                    if (r){
+                fn: function (r) {
+                    if (r) {
                         $.ajax({
                             type: "DELETE",
                             url: SysResource.URL.delete(ids),
@@ -209,7 +271,7 @@ var SysResource = {
         reload: function () {
             SysResourceList.treegrid("reload");
         },
-        clearSelectionsAndChecked:function(){
+        clearSelectionsAndChecked: function () {
             SysResourceList.treegrid("clearChecked");
             SysResourceList.treegrid("clearSelections");
         },
@@ -224,7 +286,7 @@ var SysResource = {
 
             var queryParamsArr = [];
             for (var i = 0; i < searchName.length; i++) {
-                queryParamsArr.push(searchName[i] + ":'" + searchValue[i]+"'")
+                queryParamsArr.push(searchName[i] + ":'" + searchValue[i] + "'")
             }
             var queryParams = "{" + queryParamsArr.join(",") + "}";
 
