@@ -193,7 +193,7 @@ public class SysUserServiceImpl implements SysUserService {
             List<SysRoleResource> roleResourceList = sysRoleResourceMapper.selectByExample(roleResourceExample);
             for (SysRoleResource roleResource : roleResourceList) {
                 SysResource resource = sysResourceMapper.selectByPrimaryKey(roleResource.getResourceId());
-                if (resource.getPid() == null) {
+                if (resource != null && resource.getPid() == null) {
                     Tree tree = resourceToTree(resource);
                     if (!treeList.contains(tree)) {
                         treeList.add(tree);
@@ -206,7 +206,7 @@ public class SysUserServiceImpl implements SysUserService {
         Collections.sort(treeList, new Comparator<Tree>() {
             @Override
             public int compare(Tree t1, Tree t2) {
-                return t1.getSeq()-t2.getSeq();
+                return t1.getSeq() - t2.getSeq();
             }
         });
         return BaseResult.ok("请求成功", treeList);
@@ -253,7 +253,7 @@ public class SysUserServiceImpl implements SysUserService {
         Collections.sort(childList, new Comparator<Tree>() {
             @Override
             public int compare(Tree t1, Tree t2) {
-                return t1.getSeq()-t2.getSeq();
+                return t1.getSeq() - t2.getSeq();
             }
         });
 

@@ -1,14 +1,16 @@
 package me.jinkun.rds.sys.service.impl;
 
-import me.jinkun.rds.sys.convert.SysResourceConvert;
-import me.jinkun.rds.sys.dao.SysResourceMapper;
-import me.jinkun.rds.sys.domain.SysResource;
-import me.jinkun.rds.sys.domain.SysResourceExample;
-import me.jinkun.rds.sys.service.SysResourceService;
-import me.jinkun.rds.sys.web.form.SysResourceForm;
 import me.jinkun.rds.common.base.BaseResult;
 import me.jinkun.rds.common.base.EUDataGridResult;
 import me.jinkun.rds.common.base.Tree;
+import me.jinkun.rds.sys.convert.SysResourceConvert;
+import me.jinkun.rds.sys.dao.SysResourceMapper;
+import me.jinkun.rds.sys.dao.SysRoleResourceMapper;
+import me.jinkun.rds.sys.domain.SysResource;
+import me.jinkun.rds.sys.domain.SysResourceExample;
+import me.jinkun.rds.sys.domain.SysRoleResourceExample;
+import me.jinkun.rds.sys.service.SysResourceService;
+import me.jinkun.rds.sys.web.form.SysResourceForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,9 @@ public class SysResourceServiceImpl implements SysResourceService {
     @Autowired
     SysResourceMapper sysResourceMapper;
 
+    @Autowired
+    SysRoleResourceMapper sysRoleResourceMapper;
+
     public BaseResult delete(Long id) {
         sysResourceMapper.deleteByPrimaryKey(id);
         return BaseResult.ok("删除成功");
@@ -31,9 +36,18 @@ public class SysResourceServiceImpl implements SysResourceService {
 
     @Override
     public BaseResult deleteByIds(String ids) {
+        List<Long> idList = idsToList(ids);
+        //删除中间关联关系
+        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
+        roleResourceExample.createCriteria().andResourceIdIn(idList);
+        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+
+        //删除资源
         SysResourceExample example = new SysResourceExample();
-        example.createCriteria().andIdIn(idsToList(ids));
+        example.createCriteria().andIdIn(idList);
         sysResourceMapper.deleteByExample(example);
+
+
         return BaseResult.ok("删除成功");
     }
 

@@ -41,13 +41,15 @@ public class SysRoleServiceImpl implements SysRoleService {
     public BaseResult deleteByIds(String ids) {
         List<Long> idList = idsToList(ids);
 
-        SysRoleExample example = new SysRoleExample();
-        example.createCriteria().andIdIn(idList);
-        sysRoleMapper.deleteByExample(example);
-
+        //删除资源中间表
         SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
         roleResourceExample.createCriteria().andRoleIdIn(idList);
         sysRoleResourceMapper.deleteByExample(roleResourceExample);
+
+        //删除角色表
+        SysRoleExample example = new SysRoleExample();
+        example.createCriteria().andIdIn(idList);
+        sysRoleMapper.deleteByExample(example);
         return BaseResult.ok("删除成功");
     }
 
