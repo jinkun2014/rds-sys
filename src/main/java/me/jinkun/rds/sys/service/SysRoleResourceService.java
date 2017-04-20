@@ -1,11 +1,37 @@
 package me.jinkun.rds.sys.service;
 
-import me.jinkun.rds.sys.web.form.SysRoleResourceForm;
 import me.jinkun.rds.common.base.BaseResult;
 import me.jinkun.rds.common.base.EUDataGridResult;
+import me.jinkun.rds.sys.web.form.SysRoleResourceForm;
+
+import java.util.List;
 
 
 public interface SysRoleResourceService {
+
+    /**
+     * Description: 跟据角色获取资源ID <br/>
+     * Autor: Created by jinkun on 2017/4/20.
+     */
+    List<Long> getResourcesIdsByRoleId(Long id);
+
+    /**
+     * Description: 删除角色关联的资源信息 <br/>
+     * Autor: Created by jinkun on 2017/4/20.
+     */
+    void deleteByRoleId(Long id);
+
+    /**
+     * Description: 删除角色关联的资源信息 <br/>
+     * Autor: Created by jinkun on 2017/4/20.
+     */
+    void deleteByRoleIds(List<Long> ids);
+
+    /**
+     * Description: 删除资源关联的角色信息 <br/>
+     * Autor: Created by jinkun on 2017/4/20.
+     */
+    void deleteByResourceIds(List<Long> ids);
 
     /**
      * Description: 增加或修改 <br/>

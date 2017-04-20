@@ -10,8 +10,8 @@ Date: 2016-12-30
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" plain="true" onclick="javascript:SysResource.list.delete()">删除</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="javascript:SysResource.list.edit()">编辑</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" plain="true" onclick="javascript:SysResource.list.reload()">刷新</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" plain="true" onclick="javascript:SysResource.list.collapseAll()">折叠</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" plain="true" onclick="javascript:SysResource.list.expandAll()">展开</a>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-standard-plugin-delete'" plain="true" onclick="javascript:SysResource.list.collapseAll()">折叠</a>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-standard-plugin-add'" plain="true" onclick="javascript:SysResource.list.expandAll()">展开</a>
 </div>
 <!-- 列表 -->
 <table id="SysResourceList" data-options="border:false" style="width: 100%;" title="资源"></table>

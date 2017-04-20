@@ -74,6 +74,47 @@ public class SysRoleResourceServiceImpl implements SysRoleResourceService {
     }
 
     @Override
+    public List<Long> getResourcesIdsByRoleId(Long id) {
+        SysRoleResourceExample example = new SysRoleResourceExample();
+        example.createCriteria().andRoleIdEqualTo(id);
+        List<SysRoleResource> sysRoleResources = sysRoleResourceMapper.selectByExample(example);
+        return resourcesIdList(sysRoleResources);
+    }
+
+    private List<Long> resourcesIdList(List<SysRoleResource> sysRoleResources) {
+        List<Long> idList = new ArrayList<>();
+        if (sysRoleResources != null && sysRoleResources.size() > 0) {
+            for (SysRoleResource s : sysRoleResources) {
+                idList.add(s.getResourceId());
+            }
+        }
+        return idList;
+    }
+
+    @Override
+    public void deleteByRoleId(Long id) {
+        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
+        roleResourceExample.createCriteria().andRoleIdEqualTo(id);
+        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+    }
+
+    @Override
+    public void deleteByRoleIds(List<Long> ids) {
+        //删除资源中间表
+        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
+        roleResourceExample.createCriteria().andRoleIdIn(ids);
+        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+    }
+
+    @Override
+    public void deleteByResourceIds(List<Long> ids) {
+        //删除中间关联关系
+        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
+        roleResourceExample.createCriteria().andResourceIdIn(ids);
+        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+    }
+
+    @Override
     public BaseResult saveOrUpdate(SysRoleResourceForm form) {
         SysRoleResource entity = SysRoleResourceConvert.formToEntity(form);
         if (entity.getId() != null) {

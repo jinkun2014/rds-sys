@@ -1,16 +1,15 @@
 package me.jinkun.rds.sys.service.impl;
 
-import me.jinkun.rds.sys.convert.SysRoleConvert;
-import me.jinkun.rds.sys.dao.SysRoleMapper;
-import me.jinkun.rds.sys.dao.SysRoleResourceMapper;
-import me.jinkun.rds.sys.domain.SysRole;
-import me.jinkun.rds.sys.domain.SysRoleExample;
-import me.jinkun.rds.sys.domain.SysRoleResource;
-import me.jinkun.rds.sys.domain.SysRoleResourceExample;
-import me.jinkun.rds.sys.service.SysRoleService;
-import me.jinkun.rds.sys.web.form.SysRoleForm;
 import me.jinkun.rds.common.base.BaseResult;
 import me.jinkun.rds.common.base.EUDataGridResult;
+import me.jinkun.rds.sys.convert.SysRoleConvert;
+import me.jinkun.rds.sys.dao.SysRoleMapper;
+import me.jinkun.rds.sys.domain.SysRole;
+import me.jinkun.rds.sys.domain.SysRoleExample;
+import me.jinkun.rds.sys.service.SysRoleResourceService;
+import me.jinkun.rds.sys.service.SysRoleService;
+import me.jinkun.rds.sys.web.form.SysRoleForm;
+import me.jinkun.rds.sys.web.form.SysRoleResourceForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +25,13 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
     SysRoleMapper sysRoleMapper;
     @Autowired
-    SysRoleResourceMapper sysRoleResourceMapper;
+    SysRoleResourceService sysRoleResourceService;
 
     public BaseResult delete(Long id) {
-        sysRoleMapper.deleteByPrimaryKey(id);
+        //删除关联资源
+        sysRoleResourceService.deleteByRoleId(id);
 
-        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
-        roleResourceExample.createCriteria().andRoleIdEqualTo(id);
-        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+        sysRoleMapper.deleteByPrimaryKey(id);
         return BaseResult.ok("删除成功");
     }
 
@@ -41,10 +39,8 @@ public class SysRoleServiceImpl implements SysRoleService {
     public BaseResult deleteByIds(String ids) {
         List<Long> idList = idsToList(ids);
 
-        //删除资源中间表
-        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
-        roleResourceExample.createCriteria().andRoleIdIn(idList);
-        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+        //删除关联资源
+        sysRoleResourceService.deleteByRoleIds(idList);
 
         //删除角色表
         SysRoleExample example = new SysRoleExample();
@@ -97,40 +93,26 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public BaseResult getResources(Long id) {
-        SysRoleResourceExample example = new SysRoleResourceExample();
-        example.createCriteria().andRoleIdEqualTo(id);
-        List<SysRoleResource> sysRoleResources = sysRoleResourceMapper.selectByExample(example);
-        return BaseResult.ok("请求成功", resourcesIdList(sysRoleResources));
+        List<Long> idList = sysRoleResourceService.getResourcesIdsByRoleId(id);
+        return BaseResult.ok("请求成功", idList);
     }
 
     @Override
     public BaseResult saveResources(Long roleId, String ids) {
         //删除以前的数据
-        SysRoleResourceExample example = new SysRoleResourceExample();
-        example.createCriteria().andRoleIdEqualTo(roleId);
-        sysRoleResourceMapper.deleteByExample(example);
+        sysRoleResourceService.deleteByRoleId(roleId);
 
         if (ids != null && !"".equals(ids)) {
             //保存新数据
             String[] idArr = ids.split(",");
             for (int i = 0; i < idArr.length; i++) {
-                SysRoleResource roleResource = new SysRoleResource();
-                roleResource.setRoleId(roleId);
-                roleResource.setResourceId(Long.valueOf(idArr[i]));
-                sysRoleResourceMapper.insert(roleResource);
+                SysRoleResourceForm roleResourceForm = new SysRoleResourceForm();
+                roleResourceForm.setRoleId(roleId);
+                roleResourceForm.setResourceId(Long.valueOf(idArr[i]));
+                sysRoleResourceService.saveOrUpdate(roleResourceForm);
             }
         }
         return BaseResult.ok("保存成功");
-    }
-
-    private List<Long> resourcesIdList(List<SysRoleResource> sysRoleResources) {
-        List<Long> idList = new ArrayList<>();
-        if (sysRoleResources != null && sysRoleResources.size() > 0) {
-            for (SysRoleResource s : sysRoleResources) {
-                idList.add(s.getResourceId());
-            }
-        }
-        return idList;
     }
 
     @Override

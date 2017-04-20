@@ -5,11 +5,10 @@ import me.jinkun.rds.common.base.EUDataGridResult;
 import me.jinkun.rds.common.base.Tree;
 import me.jinkun.rds.sys.convert.SysResourceConvert;
 import me.jinkun.rds.sys.dao.SysResourceMapper;
-import me.jinkun.rds.sys.dao.SysRoleResourceMapper;
 import me.jinkun.rds.sys.domain.SysResource;
 import me.jinkun.rds.sys.domain.SysResourceExample;
-import me.jinkun.rds.sys.domain.SysRoleResourceExample;
 import me.jinkun.rds.sys.service.SysResourceService;
+import me.jinkun.rds.sys.service.SysRoleResourceService;
 import me.jinkun.rds.sys.web.form.SysResourceForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     SysResourceMapper sysResourceMapper;
 
     @Autowired
-    SysRoleResourceMapper sysRoleResourceMapper;
+    SysRoleResourceService sysRoleResourceService;
 
     public BaseResult delete(Long id) {
         sysResourceMapper.deleteByPrimaryKey(id);
@@ -37,17 +36,13 @@ public class SysResourceServiceImpl implements SysResourceService {
     @Override
     public BaseResult deleteByIds(String ids) {
         List<Long> idList = idsToList(ids);
-        //删除中间关联关系
-        SysRoleResourceExample roleResourceExample = new SysRoleResourceExample();
-        roleResourceExample.createCriteria().andResourceIdIn(idList);
-        sysRoleResourceMapper.deleteByExample(roleResourceExample);
+
+        sysRoleResourceService.deleteByResourceIds(idList);
 
         //删除资源
         SysResourceExample example = new SysResourceExample();
         example.createCriteria().andIdIn(idList);
         sysResourceMapper.deleteByExample(example);
-
-
         return BaseResult.ok("删除成功");
     }
 
