@@ -67,7 +67,7 @@ var SysUser = {
             SysUserForm.submit();
         },
         close: function () {
-            SysUserEdit.window('close');
+            SysUserEdit.dialog('close');
         }
     },
     list: {
@@ -136,7 +136,7 @@ var SysUser = {
         },
         //增
         add: function () {
-            SysUserEdit.window({
+            SysUserEdit.dialog({
                     href: SysUser.URL.inputUI(),
                     onLoad: function () {
                         SysUserOrg.combotree({
@@ -151,7 +151,7 @@ var SysUser = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //改
         edit: function () {
@@ -166,7 +166,7 @@ var SysUser = {
                 return;
             }
 
-            SysUserEdit.window({
+            SysUserEdit.dialog({
                     href: SysUser.URL.inputUI(),
                     onLoad: function () {
                         //方案一：使用Form的load去load数据
@@ -201,7 +201,7 @@ var SysUser = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //删
         delete: function () {

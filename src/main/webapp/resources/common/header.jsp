@@ -3,10 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 
-<!-- 新 Bootstrap 核心 CSS 文件-->
-<!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
-<!--<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
-<!--<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
+<!-- Bootstrap -->
+<link rel="stylesheet" href="${ctx}/resources/bootstrap/css/bootstrap.min.css">
 
 <!-- easyui -->
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/jquery-easyui-1.5/themes/material/easyui.css"/>
@@ -22,3 +20,9 @@
 <!-- 自定义js -->
 <script type="text/javascript" src="${ctx}/resources/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/extJs.js"></script>
+
+<!-- 自定义css -->
+<link rel="stylesheet" href="${ctx}/resources/css/common.css">
+
+
+

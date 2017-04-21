@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="resources/common/tag.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>首页</title>
@@ -27,7 +28,7 @@
                     if (data.code == 200) {
                         //动态添加1级菜单按钮
                         for (var i = 0; i < data.data.length; i++) {
-                            $("#topMenu").append("<a href=\"#\" style='margin-left: 15px;' onclick='loadChildMenu(" + data.data[i].id + ")' class=\"easyui-linkbutton-menu\" data-options=\"iconCls:'" + data.data[i].iconCls + "',plain:true\">" + data.data[i].text + "</a>");//<div class="datagrid-btn-separator" style="height:24px;line-height: 36px;margin: 6px 0 6px 0;"></div>
+                            $("#topMenu").append("<a href=\"#\" style='margin-left: 15px;margin-bottom: 3px;' onclick='loadChildMenu(" + data.data[i].id + ")' class=\"easyui-linkbutton-menu\" data-options=\"iconCls:'" + data.data[i].iconCls + "',plain:true\">" + data.data[i].text + "</a>");//<div class="datagrid-btn-separator" style="height:24px;line-height: 36px;margin: 6px 0 6px 0;"></div>
                             if (i == 0) {
                                 loadChildMenu(data.data[i].id);
                             }
@@ -60,6 +61,7 @@
             $('#menu').tree({
                 url: "/sys/users/menu/" + id + "/tree",
                 method: 'get',
+                lines:true,
                 onClick: function (node) {
                     if ($('#menu').tree("isLeaf", node.target)) {
                         var tabs = $("#tabs");
@@ -93,7 +95,7 @@
 <div data-options="region:'north',title:''" style="height: 40px;">
     <div class="headerTop">
         <!-- 一级菜单 -->
-        <div id="topMenu" style="float: left; margin-top: 5px;"></div>
+        <div id="topMenu" style="float: left; margin-bottom: 5px;"></div>
 
         <!-- 用户信息 -->
         <span style="float: right;margin-right: 10px;text-align: center">

@@ -5,7 +5,7 @@ Date: 2016-12-30
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- 工具栏 -->
-<div id="SysUserToolbar">
+<div id="SysUserToolbar"  style="padding:5px;height:auto">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" onclick="javascript:SysUser.list.add()">增加</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" plain="true" onclick="javascript:SysUser.list.delete()">删除</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" onclick="javascript:SysUser.list.edit()">编辑</a>
@@ -30,7 +30,7 @@ Date: 2016-12-30
     </div>
 </div>
 <!-- 弹窗  --> <!-- inline:true 不然多次打开tab会重复提交表单 -->
-<div id="SysUserEdit" title="用户" data-options="iconCls: 'icon-save',closed: true,modal: true,inline:true" title="用户" style="width:1000px;height:500px;top: 100px;padding: 10px;display: none"></div>
+<div id="SysUserEdit" title="用户"  style="width:500px;height:500px;top: 100px;padding: 10px;display: none" data-options="iconCls: 'icon-save',closed: true,modal: true,inline:true,buttons:[{text:'保存',iconCls:'icon-save',handler:function(){SysUser.input.submitForm()}},{text:'取消',iconCls:'icon-cancel',handler:function(){SysUser.input.close()}}]"></div>
 <script src="<%=request.getContextPath()%>/jsp/sys/sys-user/sys-user.js"></script>
 <script>
     SysUser.list.init('<%=request.getContextPath()%>');

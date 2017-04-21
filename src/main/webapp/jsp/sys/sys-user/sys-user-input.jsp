@@ -5,24 +5,24 @@ Date: 2016-12-30
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form id="SysUserForm" method="post">
-    <table align="center">
+    <table class="com_table" align="center">
         <input type="hidden" name="id">
         <tr>
             <td></td>
             <td><label>登录名:</label></td>
-            <td><input class="easyui-textbox" type="text" name="loginName" data-options="required:true"/></td>
+            <td><input class="easyui-textbox com_input" type="text" name="loginName" data-options="required:true"/></td>
             <td></td>
         </tr>
         <tr>
             <td></td>
             <td><label>用户名:</label></td>
-            <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"/></td>
+            <td><input class="easyui-textbox com_input" type="text" name="name" data-options="required:true"/></td>
             <td></td>
         </tr>
         <tr>
             <td></td>
             <td><label>密码:</label></td>
-            <td><input class="easyui-textbox" type="text" name="password" data-options="required:true"/></td>
+            <td><input class="easyui-textbox com_input" type="text" name="password" data-options="required:true"/></td>
             <td></td>
         </tr>
         <tr>
@@ -39,13 +39,13 @@ Date: 2016-12-30
         <tr>
             <td></td>
             <td><label>年龄:</label></td>
-            <td><input class="easyui-textbox" type="text" name="age" data-options="required:false"/></td>
+            <td><input class="easyui-textbox com_input" type="text" name="age" data-options="required:false"/></td>
             <td></td>
         </tr>
         <tr>
             <td></td>
             <td><label>手机号:</label></td>
-            <td><input class="easyui-textbox" type="text" name="phone" data-options="required:false"/></td>
+            <td><input class="easyui-textbox com_input" type="text" name="phone" data-options="required:false"/></td>
             <td></td>
         </tr>
         <tr>
@@ -73,22 +73,14 @@ Date: 2016-12-30
         <tr>
             <td></td>
             <td><label>所属部门:</label></td>
-            <td><select id="SysUserOrg" name="orgId" data-options="textField:'text',valueField:'id',multiple:true,onlyLeafCheck:true,required:true" style="width:173px;"></select></td>
+            <td><select id="SysUserOrg" name="orgId" class="com_input" data-options="textField:'text',valueField:'id',multiple:true,onlyLeafCheck:true,required:true"></select></td>
             <td></td>
         </tr>
         <tr>
             <td></td>
             <td><label>所有角色:</label></td>
-            <td><select id="SysUserRole" name="roleId" data-options="textField:'name',valueField:'id',multiple:true,onlyLeafCheck:true,required:true" style="width:173px;"></select></td>
+            <td><select id="SysUserRole" name="roleId" class="com_input" data-options="textField:'name',valueField:'id',multiple:true,onlyLeafCheck:true,required:true" style="width:173px;"></select></td>
             <td></td>
-        </tr>
-        <tr>
-            <td colspan="4" align="center">
-                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'"
-                   onclick="javascript:SysUser.input.submitForm()">保存</a>
-                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
-                   onclick="javascript:SysUser.input.close()">返回</a>
-            </td>
         </tr>
     </table>
 </form>

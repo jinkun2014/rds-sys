@@ -61,7 +61,7 @@ var SysOrg = {
             SysOrgForm.submit();
         },
         close: function () {
-            SysOrgEdit.window('close');
+            SysOrgEdit.dialog('close');
         },
     },
     list: {
@@ -97,6 +97,11 @@ var SysOrg = {
                     {field: 'seq', title: '排序', width: '13.571%', hidden: false},
                     {field: 'createTime', title: '创建时间', width: '13.571%', hidden: false},
                 ]],
+                //设置选中事件，清除之前的行选择
+                onClickRow: function (row) {
+                    SysOrgList.treegrid("unselectAll");
+                    SysOrgList.treegrid("selectRow",row.id);
+                },
                 loadFilter: function (data, parentId) {
                     var opt = $(this).data().treegrid.options;
                     var parentField;
@@ -120,7 +125,7 @@ var SysOrg = {
         },
         //增
         add: function () {
-            SysOrgEdit.window({
+            SysOrgEdit.dialog({
                     href: SysOrg.URL.inputUI(),
                     onLoad: function () {
                         parentOrg.combotree({
@@ -130,7 +135,7 @@ var SysOrg = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //改
         edit: function () {
@@ -145,7 +150,7 @@ var SysOrg = {
                 return;
             }
 
-            SysOrgEdit.window({
+            SysOrgEdit.dialog({
                     href: SysOrg.URL.inputUI(),
                     onLoad: function () {
                         //方案一：使用Form的load去load数据
@@ -172,7 +177,7 @@ var SysOrg = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //删
         delete: function () {

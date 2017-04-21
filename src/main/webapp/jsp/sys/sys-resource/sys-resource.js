@@ -70,11 +70,11 @@ var SysResource = {
             SysResourceForm.submit();
         },
         close: function () {
-            SysResourceEdit.window('close');
+            SysResourceEdit.dialog('close');
         },
         chooseIcon: function () {
             //使用全局弹窗
-            globalWindow.window({
+            globalWindow.dialog({
                     title:'选择图标',
                     width:600,
                     height:400,
@@ -82,11 +82,11 @@ var SysResource = {
                     href: SysResource.URL.iconUI(),
                     cache:false
                 })
-                .window("open");
+                .dialog("open");
         },
         setIcon: function (value) {
             iconText.textbox("setValue", value);
-            globalWindow.window("close");
+            globalWindow.dialog("close");
         }
     },
     list: {
@@ -187,7 +187,7 @@ var SysResource = {
         },
         //增
         add: function () {
-            SysResourceEdit.window({
+            SysResourceEdit.dialog({
                     href: SysResource.URL.inputUI(),
                     onLoad: function () {
                         parentResource.combotree({
@@ -197,7 +197,7 @@ var SysResource = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //改
         edit: function () {
@@ -212,7 +212,7 @@ var SysResource = {
                 return;
             }
 
-            SysResourceEdit.window({
+            SysResourceEdit.dialog({
                     href: SysResource.URL.inputUI(),
                     onLoad: function () {
                         //方案一：使用Form的load去load数据
@@ -239,7 +239,7 @@ var SysResource = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //删
         delete: function () {

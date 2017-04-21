@@ -70,7 +70,7 @@ var SysRole = {
             SysRoleForm.submit();
         },
         close: function () {
-            SysRoleEdit.window('close');
+            SysRoleEdit.dialog('close');
         }
     },
     resource: {
@@ -232,13 +232,13 @@ var SysRole = {
         },
         //增
         add: function () {
-            SysRoleEdit.window({
+            SysRoleEdit.dialog({
                     href: SysRole.URL.inputUI(),
                     onLoad: function () {
 
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //改
         edit: function () {
@@ -253,7 +253,7 @@ var SysRole = {
                 return;
             }
 
-            SysRoleEdit.window({
+            SysRoleEdit.dialog({
                     href: SysRole.URL.inputUI(),
                     onLoad: function () {
                         //方案一：使用Form的load去load数据
@@ -272,7 +272,7 @@ var SysRole = {
                         });
                     }
                 })
-                .window("open");
+                .dialog("open");
         },
         //删
         delete: function () {
