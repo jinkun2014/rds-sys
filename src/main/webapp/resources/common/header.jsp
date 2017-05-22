@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="${ctx}/resources/bootstrap/css/bootstrap.min.css">
 
 <!-- easyui -->
-<link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/jquery-easyui-1.5/themes/material/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/jquery-easyui-1.5/themes/gray/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${ctx}/resources/easyui/jquery-easyui-1.5/themes/icon.css"/>
 <script type="text/javascript" src="${ctx}/resources/easyui/jquery-easyui-1.5/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/easyui/jquery-easyui-1.5/jquery.easyui.min.js"></script>

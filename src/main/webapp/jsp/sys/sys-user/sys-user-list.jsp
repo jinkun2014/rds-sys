@@ -17,9 +17,9 @@ Date: 2016-12-30
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" onclick="javascript:SysUser.list.search()">搜索</a>
     </span>
 </div>
-<div class="easyui-panel" data-options="width:'100%',minHeight:600,border:false">
+<div class="easyui-panel" data-options="fit:true,border:false">
     <div class="easyui-layout" data-options="fit:true">
-        <div data-options="region:'west',split:false,title:'组织机构'" style="width:15%;">
+        <div data-options="region:'west',title:'组织机构',split:true,border:false" style="width:15%;">
             <!-- 模块列表 -->
             <ul id="SysUserOrgTree"></ul>
         </div>

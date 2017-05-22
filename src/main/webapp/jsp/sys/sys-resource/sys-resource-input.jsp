@@ -16,7 +16,7 @@ Date: 2016-12-30
         <tr>
             <td></td>
             <td><label>资源路径:</label></td>
-            <td><input class="easyui-textbox com_input" type="text" name="url" data-options="required:false"/></td>
+            <td><input class="easyui-textbox com_input" type="text" name="url" data-options="required:false,value:'/resources/images/32x32/1.png'"/></td>
             <td></td>
         </tr>
         <tr>
