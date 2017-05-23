@@ -55,7 +55,7 @@ Date: 2016-12-30
         <tr>
             <td></td>
             <td><label>排序:</label></td>
-            <td><input class="easyui-numberspinner" type="text" name="seq" data-options="min:0,max:10000,editable:false,required:false,value:0"/></td>
+            <td><input class="easyui-numberspinner" type="text" name="seq" data-options="min:0,max:10000,editable:true,required:false,value:0"/></td>
             <td></td>
         </tr>
         <tr>

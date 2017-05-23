@@ -76,13 +76,12 @@ var SysResource = {
             //使用全局弹窗
             globalWindow.dialog({
                     title:'选择图标',
-                    width:600,
+                    width:605,
                     height:400,
                     modal:true,
                     href: SysResource.URL.iconUI(),
                     cache:false
-                })
-                .dialog("open");
+                });
         },
         setIcon: function (value) {
             iconText.textbox("setValue", value);
@@ -130,7 +129,7 @@ var SysResource = {
                         field: 'icon', title: '资源图标', width: '7.917%', hidden: false,
                         formatter: function (value, row, index) {
                             if (value) {
-                                return "<input type='button' class='" + value + "' title='" + value + "' style='margin:0px;width: 20px;height: 20px;'/>";
+                                return '<img src="'+value+'" style="margin:0px;width: 20px;height: 20px;"/>';
                             }
                             return value;
                         }

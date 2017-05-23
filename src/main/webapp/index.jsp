@@ -209,7 +209,7 @@
             }
 
             //默认选择第1个
-            $('#secondMenu').accordion('select', 0);
+            //$('#secondMenu').accordion('select', 0);
         }
 
         function onClickTopMenu(id) {
