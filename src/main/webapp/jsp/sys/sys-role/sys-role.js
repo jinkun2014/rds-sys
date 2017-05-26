@@ -102,7 +102,7 @@ var SysRole = {
                                 for (var i in root) {
                                     for (var j in data.data) {
                                         console.info(data.data[j]);
-                                        SysRole.resource.checkTreeNode(root[i].children, data.data[j]);
+                                        SysRole.resource.checkTreeNode(root, data.data[j]);
                                     }
                                 }
                             }
@@ -141,16 +141,18 @@ var SysRole = {
         },
         // 递归遍历所有节点并选中
         checkTreeNode: function (children, id) {
-            for (var i = 0; i < children.length; i++) {
-                if (children[i].id == id) {
-                    var node = SysResourceTree.tree('find', children[i].id).target;
-                    if (SysResourceTree.tree('isLeaf', node)) {
-                        SysResourceTree.tree('check', node); // 选中树叶子节点
-                    }
-                    break;
-                } else {
-                    if (children[i].children != null) {
-                        SysRole.resource.checkTreeNode(children[i].children, id); // 没有找到则接着遍历
+            if (children) {
+                for (var i = 0; i < children.length; i++) {
+                    if (children[i].id == id) {
+                        var node = SysResourceTree.tree('find', children[i].id).target;
+                        if (SysResourceTree.tree('isLeaf', node)) {
+                            SysResourceTree.tree('check', node); // 选中树叶子节点
+                        }
+                        break;
+                    } else {
+                        if (children[i].children != null) {
+                            SysRole.resource.checkTreeNode(children[i].children, id); // 没有找到则接着遍历
+                        }
                     }
                 }
             }
@@ -211,9 +213,9 @@ var SysRole = {
                     }
                 ]],
                 //设置选中事件，清除之前的行选择
-                onClickRow: function (index,row) {
+                onClickRow: function (index, row) {
                     SysRoleList.datagrid("unselectAll");
-                    SysRoleList.datagrid("selectRow",index);
+                    SysRoleList.datagrid("selectRow", index);
                 },
                 onLoadSuccess: function (data) {
                     $('.easyui-linkbutton-edit').linkbutton({text: '编辑'});

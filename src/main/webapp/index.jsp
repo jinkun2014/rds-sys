@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>123</title>
+    <title>基础权限管理系统</title>
     <%@include file="resources/common/header.jsp" %>
 
     <style>
